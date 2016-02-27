@@ -68,7 +68,13 @@ class Solution
 	#* Read the 'test.txt' file in lines 
 	#* Create an array of LineAnalyzers for each line in the file
 	def analyze_file()
-			
+		line_number = 1
+		if File.exist?('test.txt')
+			File.foreach('test.txt')do |line|
+				@analyzers << LineAnalyzer.new(line, line_number)
+				line_number += 1
+			end
+		end
 	end
 
 	# Implement the calculate_line_with_highest_frequency() method to:
