@@ -71,6 +71,7 @@ class Solution
 		line_number = 1
 		if File.exist?('test.txt')
 			File.foreach('test.txt')do |line|
+				line.chomp
 				@analyzers << LineAnalyzer.new(line, line_number)
 				line_number += 1
 			end
@@ -83,12 +84,27 @@ class Solution
 	#* identifies the LineAnalyzer objects in the analyzers array that have highest_wf_count equal to highest_count_across_lines 
 	#  attribute value determined previously and stores them in highest_count_words_across_lines.
 	def calculate_line_with_highest_frequency()
+		temp_array = []
+		@highest_count_words_across_lines = []
+		@analyzers.each do |row|
+			temp_array << row.highest_wf_count
+		end
+		@highest_count_across_lines = temp_array.max
+		@analyzers.each do |row|
+			if row.highest_wf_count == @highest_count_across_lines
+				@highest_count_words_across_lines << row
+			end
+		end
 	end
 	
 	
 	#Implement the print_highest_word_frequency_across_lines() method to
 	#* print the values of objects in highest_count_words_across_lines in the specified format
 	def print_highest_word_frequency_across_lines()
+		puts "The following words have the highest word frequency per line:"
+		@highest_count_words_across_lines.each do |row|
+			puts "#{row.highest_wf_words} (appears in line #{row.line_number})"
+		end
 	end
 
 end
