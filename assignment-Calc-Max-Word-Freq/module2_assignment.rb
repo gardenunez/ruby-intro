@@ -32,7 +32,7 @@ class LineAnalyzer
 	#  store that in the highest_wf_words attribute.
 	def calculate_word_frequency()
 		word_freq = Hash.new(0)
-		words = @content.split(/[^a-zA-Z]/)
+		words = @content.downcase.split(/[^a-zA-Z]/)
 		words.each { |word| word_freq[word] += 1 }
 		order = word_freq.sort_by { |x,y| y}
 		order.reverse!
