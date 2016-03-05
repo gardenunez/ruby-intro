@@ -1,4 +1,4 @@
-<h1>Searching for - <% @search_term %></h1>
+<h1>Searching for - <%= @search_term %></h1>
 
 <table border="1">
 	<tr>
@@ -6,13 +6,11 @@
 	 <th>Name</th>
 	 <th>Description</th>
 	</tr>
-	<% Courses.each do |course| %>
-	<tr>
-		<tr>
+	<% @courses.each do |course| %>
+	 <tr class=<%= cycle('even', 'odd') %>>
 			<td><%= image_tag(course["smallIcon"])%></td>
 			<td><%= course["name"]%></td>
 			<td><%= course["shortDescription"]%></td>
-		</tr>
 	</tr>
 	<% end %>
 </table>
